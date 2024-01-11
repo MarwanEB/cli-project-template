@@ -1,0 +1,51 @@
+{
+  "name": "cli-project-template",
+  "version": "0.0.0",
+  "description": "Opinionated project template to write command line packages in TypeScript.",
+  "main": "src/index.ts",
+  "exports": "./src/index.ts",
+  "engines": {
+    "node": ">=21"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "command:create": "ts-node src/index.ts command:create",
+    "command:list": "ts-node src/index.ts command:list",
+    "command:run": "ts-node src/index.ts",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarwanEB/cli-project-template.git"
+  },
+  "keywords": [
+    "cli",
+    "template",
+    "typescript",
+    "command-line"
+  ],
+  "author": {
+    "name": "Marwan El Boussarghini",
+    "url": "https://www.linkedin.com/in/marwan-el-boussarghini/"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/MarwanEB/cli-project-template/issues"
+  },
+  "homepage": "https://github.com/MarwanEB/cli-project-template#readme",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "inquirer": "^8.2.6",
+    "lodash": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.8",
+    "husky": "^8.0.3",
+    "tsconfig-paths": "^4.2.0",
+    "type-fest": "^4.9.0"
+  }
+}
