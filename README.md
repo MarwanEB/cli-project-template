@@ -62,7 +62,3 @@ __Usage:__ `cli-project-template command:list [options]`
 | `-h, --help` | display help for command |
 
 <!-- DO NOT REMOVE: CommandListEnd -->
-
-## Todo 📝
-
-- [ ] Write git hook to print all commands documentation in `README.md`.

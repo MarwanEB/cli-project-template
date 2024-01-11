@@ -37,33 +37,33 @@ export const action = async ({ target, format }: { target: string, format: strin
   const commands = getCommands()
 
   // Format the output to the right format
-  const output: string = ''
+  let output: string = ''
   {
     switch (format) {
       case Format.JSON: {
-        output.concat(JSON.stringify(commands, null, 2))
+        output += JSON.stringify(commands, null, 2)
         break
       }
       case Format.MARKDOWN: {
         commands.forEach((cmd) => {
-          output.concat(`### \`${cmd.name}\`\n\n`)
-          output.concat(`${cmd.description}\n\n`)
-          output.concat(`__Usage:__ \`${pkg.name} ${cmd.subcommand}\`\n\n`)
+          output += `### \`${cmd.name}\`\n\n`
+          output += `${cmd.description}\n\n`
+          output += `__Usage:__ \`${pkg.name} ${cmd.subcommand}\`\n\n`
     
           if (cmd.args.length) {
-            output.concat('| Arg | Description |\n|:----:|:----:|\n')
+            output += '| Arg | Description |\n|:----:|:----:|\n'
             cmd.args.forEach((arg) => {
-              output.concat(`| \`${arg.term}\` | ${arg.description} |\n`)
+              output += `| \`${arg.term}\` | ${arg.description} |\n`
             })
-            output.concat('\n')
+            output += '\n'
           }
     
           if (cmd.options.length) {
-            output.concat('| Option | Description |\n|:----:|:----:|\n')
+            output += '| Option | Description |\n|:----:|:----:|\n'
             cmd.options.forEach((opt) => {
-              output.concat(`| \`${opt.term}\` | ${opt.description} |\n`)
+              output += `| \`${opt.term}\` | ${opt.description} |\n`
             })
-            output.concat('\n')
+            output += '\n'
           }
         })
         break
@@ -77,18 +77,18 @@ export const action = async ({ target, format }: { target: string, format: strin
         ), 0) + 2
     
         commands.forEach((cmd) => {
-          output.concat(`Command: ${cmd.name}\n\n`)
-          output.concat(`  Usage: ${pkg.name} ${cmd.subcommand}\n\n`)
-          output.concat(`  ${cmd.description}\n`)
-          output.concat(cmd.args.length ? '\nArguments:\n' : '')
+          output += `Command: ${cmd.name}\n\n`
+          output += `  Usage: ${pkg.name} ${cmd.subcommand}\n\n`
+          output += `  ${cmd.description}\n`
+          output += cmd.args.length ? '\nArguments:\n' : ''
           cmd.args.forEach((arg) => {
-            output.concat(`  ${arg.term.padEnd(optionTermMaxLength, ' ')} ${arg.description}\n`)
+            output += `  ${arg.term.padEnd(optionTermMaxLength, ' ')} ${arg.description}\n`
           })
-          output.concat(cmd.options.length ? '\nOptions:\n' : '')
+          output += cmd.options.length ? '\nOptions:\n' : ''
           cmd.options.forEach((opt) => {
-            output.concat(`  ${opt.term.padEnd(optionTermMaxLength, ' ')} ${opt.description}\n`)
+            output += `  ${opt.term.padEnd(optionTermMaxLength, ' ')} ${opt.description}\n`
           })
-          output.concat(`\n\n${'-'.repeat(optionTermMaxLength)}\n\n`)
+          output += `\n\n${'-'.repeat(optionTermMaxLength)}\n\n`
         })
       }
       }
@@ -114,14 +114,16 @@ export const action = async ({ target, format }: { target: string, format: strin
           throw new Error(`README.md does not contain the command list start / end markers.\nPlease add the following comments in the right part of the README.md file:\n${readmeStartMarker}\n${readmeEndMarker}`)
         }
 
-        const content = readme.slice(0, startIndex)
-        content.concat(`${readmeStartMarker}\n\n`)
-        content.concat('### Table of Contents\n\n')
-        content.concat(commands.map((cmd) => `[${cmd.name}](#${kebabCase(cmd.name.replace(':', ''))})`).join('\n'))
-        content.concat('\n\n')
-        content.concat(output)
-        content.concat(`${readmeEndMarker}\n`)
-        content.concat(readme.slice(endIndex + readmeEndMarker.length + 1))
+        let content = readme.slice(0, startIndex)
+        content += `${readmeStartMarker}\n\n`
+        content += '### Table of Contents\n\n'
+        content += commands
+          .map((cmd) => `[${cmd.name}](#${kebabCase(cmd.name.replace(':', ''))})`)
+          .join('\n')
+        content += '\n\n'
+        content += output
+        content += `${readmeEndMarker}\n`
+        content += readme.slice(endIndex + readmeEndMarker.length + 1)
 
         await writeFile(readmePath, content)
 
