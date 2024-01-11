@@ -1,6 +1,6 @@
 # cli-project-template
 
-Opinionated project template to write command line packages in TypeScript 🧑🏼‍💻.
+Opinionated project template providing the basic structure to write command line packages in TypeScript.
 
 ## Dependencies 🔗
 
@@ -23,7 +23,7 @@ npm ci
 You're all set up 🎉 ! You can now run any commands from the `package.json` file like below:
 
 ```sh
-npm run command:list
+npm run command:list -- --target cli
 ```
 
 ## Commands 📦
