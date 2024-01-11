@@ -1,0 +1,6 @@
+# Folder storing temporary files
+tmp/*
+!tmp/.gitkeep
+
+# node modules
+node_modules/*
