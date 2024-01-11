@@ -55,7 +55,7 @@ export const action = async (options: Options) => {
     }
 
     packageJson.scripts[parameters.name] = `ts-node src/index.ts ${parameters.name}`;
-    fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf-8');
+    fs.writeFile(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`, 'utf-8');
     console.log('ℹ️  package.json updated');
   }
 

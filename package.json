@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "command:create": "ts-node src/index.ts command:create",
+    "command:list": "ts-node src/index.ts command:list",
     "command:run": "ts-node src/index.ts"
   },
   "repository": {
